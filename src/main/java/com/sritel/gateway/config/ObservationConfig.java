@@ -1,4 +1,4 @@
-package com.microservice.gateway.config;
+package com.sritel.gateway.config;
 
 import io.micrometer.observation.ObservationRegistry;
 import io.micrometer.observation.aop.ObservedAspect;
