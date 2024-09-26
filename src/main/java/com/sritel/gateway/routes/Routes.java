@@ -26,20 +26,22 @@ public class Routes {
 
     @Bean
     public RouterFunction<ServerResponse> accountServiceRoute() {
-        String accountServiceUrl = getServiceUrl("account-service");
-
         return route("account-service")
-                .route(RequestPredicates.path("/api/v1/account"), HandlerFunctions.http(accountServiceUrl))
+                .route(RequestPredicates.path("/api/v1/account"), request -> {
+                    String accountServiceUrl = getServiceUrl("account-service");
+                    return HandlerFunctions.http(accountServiceUrl).handle(request);
+                })
                 .filter(CircuitBreakerFilterFunctions.circuitBreaker("accountServiceCircuitBreaker", URI.create("forward:/fallbackRoute")))
                 .build();
     }
 
     @Bean
     public RouterFunction<ServerResponse> accountServiceSwaggerRoute() {
-        String accountServiceUrl = getServiceUrl("account-service");
-
         return route("account-service-swagger")
-                .route(RequestPredicates.path("/aggregate/account-service/v3/api-docs"), HandlerFunctions.http(accountServiceUrl))
+                .route(RequestPredicates.path("/aggregate/account-service/v3/api-docs"), request -> {
+                    String accountServiceUrl = getServiceUrl("account-service");
+                    return HandlerFunctions.http(accountServiceUrl).handle(request);
+                })
                 .filter(CircuitBreakerFilterFunctions.circuitBreaker("accountServiceSwaggerCircuitBreaker", URI.create("forward:/fallbackRoute")))
                 .filter(setPath("/api-docs"))
                 .build();
@@ -47,20 +49,22 @@ public class Routes {
 
     @Bean
     public RouterFunction<ServerResponse> provisioningServiceRoute() {
-        String provisioningServiceUrl = getServiceUrl("provisioning-service");
-
         return route("provisioning-service")
-                .route(RequestPredicates.path("/api/v1/provisioning"), HandlerFunctions.http(provisioningServiceUrl))
+                .route(RequestPredicates.path("/api/v1/provisioning"), request -> {
+                    String provisioningServiceUrl = getServiceUrl("provisioning-service");
+                    return HandlerFunctions.http(provisioningServiceUrl).handle(request);
+                })
                 .filter(CircuitBreakerFilterFunctions.circuitBreaker("provisioningServiceCircuitBreaker", URI.create("forward:/fallbackRoute")))
                 .build();
     }
 
     @Bean
     public RouterFunction<ServerResponse> provisioningServiceSwaggerRoute() {
-        String provisioningServiceUrl = getServiceUrl("provisioning-service");
-
         return route("provisioning-service-swagger")
-                .route(RequestPredicates.path("/aggregate/provisioning-service/v3/api-docs"), HandlerFunctions.http(provisioningServiceUrl))
+                .route(RequestPredicates.path("/aggregate/provisioning-service/v3/api-docs"), request -> {
+                    String provisioningServiceUrl = getServiceUrl("provisioning-service");
+                    return HandlerFunctions.http(provisioningServiceUrl).handle(request);
+                })
                 .filter(CircuitBreakerFilterFunctions.circuitBreaker("provisioningServiceSwaggerCircuitBreaker", URI.create("forward:/fallbackRoute")))
                 .filter(setPath("/api-docs"))
                 .build();
@@ -68,20 +72,22 @@ public class Routes {
 
     @Bean
     public RouterFunction<ServerResponse> billingServiceRoute() {
-        String billingServiceUrl = getServiceUrl("billing-service");
-
         return route("billing-service")
-                .route(RequestPredicates.path("/api/v1/billing"), HandlerFunctions.http(billingServiceUrl))
+                .route(RequestPredicates.path("/api/v1/billing"), request -> {
+                    String billingServiceUrl = getServiceUrl("billing-service");
+                    return HandlerFunctions.http(billingServiceUrl).handle(request);
+                })
                 .filter(CircuitBreakerFilterFunctions.circuitBreaker("billingServiceCircuitBreaker", URI.create("forward:/fallbackRoute")))
                 .build();
     }
 
     @Bean
     public RouterFunction<ServerResponse> billingServiceSwaggerRoute() {
-        String billingServiceUrl = getServiceUrl("billing-service");
-
         return route("billing-service-swagger")
-                .route(RequestPredicates.path("/aggregate/billing-service/v3/api-docs"), HandlerFunctions.http(billingServiceUrl))
+                .route(RequestPredicates.path("/aggregate/billing-service/v3/api-docs"), request -> {
+                    String billingServiceUrl = getServiceUrl("billing-service");
+                    return HandlerFunctions.http(billingServiceUrl).handle(request);
+                })
                 .filter(CircuitBreakerFilterFunctions.circuitBreaker("billingServiceSwaggerCircuitBreaker", URI.create("forward:/fallbackRoute")))
                 .filter(setPath("/api-docs"))
                 .build();
