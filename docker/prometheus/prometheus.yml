@@ -7,3 +7,27 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: [ 'host.docker.internal:9000' ]
+  - job_name: 'account-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:2083' ] ## only for demo purposes don't use host.docker.internal in production
+        labels:
+          application: 'Account Service'
+  - job_name: 'billing-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:1834' ] ## only for demo purposes don't use host.docker.internal in production
+        labels:
+          application: 'Billing Service'
+  - job_name: 'provisioning-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:8082' ] ## only for demo purposes don't use host.docker.internal in production
+        labels:
+          application: 'Provisioning Service'
+  - job_name: 'notification-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:8082' ] ## only for demo purposes don't use host.docker.internal in production
+        labels:
+          application: 'Notification Service'

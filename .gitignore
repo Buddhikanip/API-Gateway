@@ -31,3 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
+volume-data/mysql_keycloak_data/mysql.sock
